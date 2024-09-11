@@ -1,0 +1,31 @@
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #71c7ff;
+}
+.nav-active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.nav-desactive {
+    text-decoration: none;
+}
+.nav-container ul {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    list-style: none;
+    padding-inline-start: 0;
+}
+.nav-left {
+    margin-left: 4px;
+}
+#nav-search {
+    border-radius: 8px;
+    width: 280px;
+}
+#nav-button {
+    width: 100px;
+    font-family: SUSE;
+    border-radius: 8px;
+}
