@@ -11,10 +11,8 @@ export function MoneyPageProvider({children}) {
     useEffect(() => {
         fetch(`${url}/latest`)
             .then(res => res.json())
-            .then(data => setItems(data))
+            .then(data => setItems(data.rates))
     },[])
-
-    console.log(items)
 
     return(
         <MoneyPageContext.Provider value={{items}}>

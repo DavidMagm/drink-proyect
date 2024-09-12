@@ -1,0 +1,17 @@
+.principal-title {
+    text-align: center;
+    font-size: large;
+    font-weight: 500;
+}
+.contain-table {
+    padding: 12px;
+}
+.table-rate {
+    display: grid;
+    gap: 4px;
+    grid-template-rows: repeat(30, 50px);
+    grid-auto-columns: 800px;
+    padding: 12px;
+    
+    border-radius: 12px;
+}
