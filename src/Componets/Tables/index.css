@@ -1,0 +1,8 @@
+.table-rate-name {
+    display: flex;
+    justify-content: space-between;
+    border: solid #71c7ff 2px;
+    padding: 8px;
+    border-radius: 12px;
+    background-color: #fff;
+}

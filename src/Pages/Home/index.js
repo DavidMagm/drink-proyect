@@ -1,6 +1,19 @@
-function Home() {
+import Layout from "../../Componets/Layout";
+import { Tables } from "../../Componets/Tables";
+import './index.css'
+
+
+function Home({children}) {
+
     return(
-        <div>home</div>
+        <Layout>
+            <h1 className="principal-title">Currency ConVention</h1>
+            <div className="contain-table">
+                <section className="table-rate">
+                    <Tables/>
+                </section>
+            </div>
+        </Layout>
     )
 }
 
