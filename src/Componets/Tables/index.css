@@ -6,3 +6,7 @@
     border-radius: 12px;
     background-color: #fff;
 }
+.table-rate-name a {
+    color: black;
+    text-decoration: none;
+}

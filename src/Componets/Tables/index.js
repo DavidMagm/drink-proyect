@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useContext } from "react"
 import { MoneyPageContext } from "../../Context";
 import './index.css'
@@ -7,16 +8,19 @@ function Tables() {
     const {items} = useContext(MoneyPageContext)
     
     
-    let arr = Object.entries(items)
+    let nameAndRate = Object.entries(items)
     //let array = Object.values(items)
     
-     console.log(arr)
+     console.log(nameAndRate)
     
     return(
         <>
            {
-            arr.map((name,index) => (
-                    <div key={index} className="table-rate-name">{name[0]}<span className="table-rate-number">{name[1]}</span></div>
+            nameAndRate.map((name,index) => (
+                    <div key={index} className="table-rate-name">
+                        <NavLink to={'rate'}>{name[0]}</NavLink>
+                        <NavLink to={'rate'}><span className="table-rate-number">{name[1]}</span></NavLink>
+                    </div>
                 ))
            }
         </>
