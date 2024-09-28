@@ -1,6 +1,13 @@
+import Layout from "../../Componets/Layout";
+import {InfoRateTable} from "../../Componets/InfoRateTable"
+
 function Rate() {
     return(
-        <div>rate</div>
+        <Layout>
+            <div>rate</div>
+            <InfoRateTable></InfoRateTable>
+        </Layout>
+        
     )
 }
 
