@@ -4,7 +4,6 @@ import {InfoRateTable} from "../../Componets/InfoRateTable"
 function Rate() {
     return(
         <Layout>
-            <div>rate</div>
             <InfoRateTable></InfoRateTable>
         </Layout>
         
