@@ -1,89 +1,12 @@
-import { useContext } from "react";
+//import { useContext } from "react";
 import { useEffect } from "react";
-import { MoneyPageContext } from "../../Context";
+//import { MoneyPageContext } from "../../Context";
 import { createChart } from "lightweight-charts";
+import { useDataValueDate } from "./useDataValueDate";
+import './index.css'
 
 
 
-function useDataValueDate(url) {
-
-    const {itemsValue, dateToday, rateWeek, setRateWeek, rateYears, setRateYears, rateDay, setRateDay} = useContext(MoneyPageContext)
-
-    // VALORES DE LA SEMANA
-    useEffect(() => {
-        fetch(`${url}/2021-01-01..?to=${itemsValue[0]}`)
-            .then(res => res.json())
-            .then(data => setRateWeek(data.rates))
-    }, [])
-
-    const weekData = []
-
-    for(let [key, value] of Object.entries(rateWeek)) {
-        for(let [_,valueItem] of Object.entries(value)) {
-            weekData.push({time: key, value: valueItem})
-        }
-    }
-    
-    //VALURES DEL DIA
-
-    useEffect(() => {
-        fetch(`${url}/2024-01-02..${dateToday}?to=${itemsValue[0]}`)
-            .then(res => res.json())
-            .then(data => setRateDay(data.rates))
-    }, [])
-
-
-    const dayData = []
-
-    for(let [key, value] of Object.entries(rateDay)) {
-        for(let [_, valueItem] of Object.entries(value)) {
-            dayData.push({time: key, value: valueItem})
-        }
-    }
-
-    console.log(dayData)
-
-
-    //VALORES DEL AÑO
-    useEffect(() => {
-        fetch(`${url}/2014-01-01..?to=${itemsValue[0]}`)
-            .then(res => res.json())
-            .then(data => setRateYears(data.rates))
-    }, [])
-
-    let arrayValueYear = Object.entries(rateYears)
-
-    const yearData = []
-
-    let filterYear = arrayValueYear.filter(uno => {
-        let res = uno[0].match(/\d\d\d\d-01-0[0-7]/g)
-        return res
-    })
-    filterYear.map(uno => {
-        for(let [_, valueItem] of Object.entries(uno[1])) {
-            yearData.push({time: uno[0], value: valueItem})
-        }
-    })
-
-    //VALORES DEL MES
-    let arrayValueMonth = Object.entries(rateWeek)
-
-    let filterMonth = arrayValueMonth.filter(uno => {
-        let res = uno[0].match(/\d\d\d\d-\d[0-9]-0[0-7]/g)
-        return res
-    })
-
-    const monthData = []
-
-    filterMonth.map(uno => {
-        for(let [_, valueItem] of Object.entries(uno[1])) {
-            monthData.push({time: uno[0], value: valueItem})
-        }
-    })
-    //console.log(filterMonth)
-
-    return {dayData,weekData,monthData,yearData}
-}
 
 //https://api.frankfurter.app
 
@@ -111,6 +34,7 @@ function TableRate() {
                 textColor: 'black',
                 background: { type: 'solid', color: 'white' },
             },
+            with: 100,
             height: 200,
         };
         
@@ -136,12 +60,26 @@ function TableRate() {
         
         setChartInterval('1D');
 
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.classList.add('buttons-container');
+        const intervals = ['1D', '1W', '1M', '1Y'];
+        intervals.forEach(interval => {
+            const button = document.createElement('button');
+            button.innerText = interval;
+            button.addEventListener('click', () => setChartInterval(interval));
+            buttonsContainer.appendChild(button);
+        });
+
+        container.appendChild(buttonsContainer);
+
         return () => {chart.remove()}
     },[])
     
     
     return(
+    <>
         <div id="container"></div>
+    </>
     )
 }
 

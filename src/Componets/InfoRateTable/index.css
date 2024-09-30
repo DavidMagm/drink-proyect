@@ -1,4 +1,7 @@
 .section-info-rate {
-    width: 900px;
+    width: 95%;
     background-color: #fff;
+}
+.container-rate {
+    padding: 12px;
 }

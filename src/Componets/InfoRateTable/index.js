@@ -11,11 +11,11 @@ function InfoRateTable() {
     
     return(
         <section className="section-info-rate">
-            <div>
+            <div className='container-name'> 
                 <h2>{itemsValue[0]}</h2>
                 <p>{itemsValue[1]}</p>
             </div>
-            <div>
+            <div className='container-rate'>
                 <TableRate></TableRate>
             </div>
         </section>

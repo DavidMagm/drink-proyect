@@ -5,10 +5,12 @@ import './index.css'
 
 function Tables() {
 
-    const {items, setItemsValue} = useContext(MoneyPageContext)
+    const {items, setItemsValue, nameAmount} = useContext(MoneyPageContext)
     
     
     let nameAndRate = Object.entries(items)
+    
+    
     //let array = Object.values(items)
     
     
@@ -17,7 +19,12 @@ function Tables() {
            {
             nameAndRate.map((name,index) => (
                     <div key={index} className="table-rate-name">
-                        <NavLink to={'rate'}><div onClick={() => setItemsValue(name)}>{name[0]}</div></NavLink>
+                        <NavLink to={'rate'}>
+                            <div onClick={() => setItemsValue(name)} className="table-rate-complete-name">
+                                {name[0]}
+                                <span>{nameAmount[name[0]]}</span>
+                            </div>
+                        </NavLink>
                         <span className="table-rate-number">{name[1]}</span>
                     </div>
                 ))
