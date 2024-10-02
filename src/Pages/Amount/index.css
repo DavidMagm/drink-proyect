@@ -1,0 +1,15 @@
+.currency-amount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 34px;
+    width: 500px;
+    height: 500px;
+    gap: 8px;
+}
+.container-amount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
