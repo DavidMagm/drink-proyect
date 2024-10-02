@@ -13,6 +13,12 @@ export function MoneyPageProvider({children}) {
     const [rateYears, setRateYears] = useState([]);
     const [dateToday, setDateToday] = useState("");
     const [nameAmount, setNameAmount] = useState({})
+    const [nameCurrency, setNameCurrency] = useState("");
+    const [nameCurrencyResult, setNameCurrencyResult] = useState("");
+    const [amountCurency, setAmountCurency] = useState("");
+    const [innerValueCurrencyResult, setInnerValueCurrencyResult] = useState(0)
+
+
 
     useEffect(() => {
         fetch(`${url}/latest`)
@@ -32,12 +38,19 @@ export function MoneyPageProvider({children}) {
             .then(res => res.json())
             .then(data => setNameAmount(data))
     }, [])
+
+    async function apiAmountCurrency(valueCash,currencyPrincipal,currencyTransform) {
+        const response = await fetch(`https://api.frankfurter.app/latest?amount=${valueCash}&from=${currencyPrincipal}&to=${currencyTransform}`)
+            const data = await response.json()
+            setInnerValueCurrencyResult(data.rates[currencyTransform])
+        
+    }
     
 
     
 
     return(
-        <MoneyPageContext.Provider value={{items,itemsValue,setItemsValue,dateToday,rateWeek,setRateWeek, rateYears, setRateYears,rateDay, setRateDay, nameAmount}}>
+        <MoneyPageContext.Provider value={{items,itemsValue,setItemsValue,dateToday,rateWeek,setRateWeek, rateYears, setRateYears,rateDay, setRateDay, nameAmount, amountCurency, setAmountCurency, nameCurrencyResult, setNameCurrencyResult, nameCurrency, setNameCurrency,innerValueCurrencyResult,apiAmountCurrency}}>
             {children}
         </MoneyPageContext.Provider>
     )
