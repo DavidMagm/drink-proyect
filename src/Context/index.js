@@ -17,6 +17,7 @@ export function MoneyPageProvider({children}) {
     const [nameCurrencyResult, setNameCurrencyResult] = useState("");
     const [amountCurency, setAmountCurency] = useState("");
     const [innerValueCurrencyResult, setInnerValueCurrencyResult] = useState(0)
+    const [valueSearch, setValueSearch] = useState("");
 
 
 
@@ -50,7 +51,7 @@ export function MoneyPageProvider({children}) {
     
 
     return(
-        <MoneyPageContext.Provider value={{items,itemsValue,setItemsValue,dateToday,rateWeek,setRateWeek, rateYears, setRateYears,rateDay, setRateDay, nameAmount, amountCurency, setAmountCurency, nameCurrencyResult, setNameCurrencyResult, nameCurrency, setNameCurrency,innerValueCurrencyResult,apiAmountCurrency}}>
+        <MoneyPageContext.Provider value={{items,itemsValue,setItemsValue,dateToday,rateWeek,setRateWeek, rateYears, setRateYears,rateDay, setRateDay, nameAmount, amountCurency, setAmountCurency, nameCurrencyResult, setNameCurrencyResult, nameCurrency, setNameCurrency,innerValueCurrencyResult,apiAmountCurrency,valueSearch, setValueSearch}}>
             {children}
         </MoneyPageContext.Provider>
     )

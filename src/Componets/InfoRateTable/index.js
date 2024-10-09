@@ -12,8 +12,9 @@ function InfoRateTable() {
     return(
         <section className="section-info-rate">
             <div className='container-name'> 
-                <h2>{itemsValue[0]}</h2>
-                <p>{itemsValue[1]}</p>
+                <h2>{itemsValue.completeName}</h2>
+                <h3>{itemsValue.nameMoney}</h3>
+                <p>{itemsValue.rateMoney}</p>
             </div>
             <div className='container-rate'>
                 <TableRate></TableRate>

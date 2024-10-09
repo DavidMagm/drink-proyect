@@ -5,27 +5,27 @@ import './index.css'
 
 function Tables() {
 
-    const {items, setItemsValue, nameAmount} = useContext(MoneyPageContext)
+    const {items, setItemsValue, nameAmount, valueSearch} = useContext(MoneyPageContext)
     
-    
+    let tableMoneyData = []
     let nameAndRate = Object.entries(items)
-    
-    
-    //let array = Object.values(items)
-    
+    console.log(valueSearch)
+    nameAndRate.map(rateName => 
+        tableMoneyData.push({nameMoney: rateName[0], rateMoney: rateName[1], completeName: nameAmount[rateName[0]]})
+    )
     
     return(
         <>
            {
-            nameAndRate.map((name,index) => (
+            tableMoneyData.map((item,index) => (
                     <div key={index} className="table-rate-name">
                         <NavLink to={'rate'}>
-                            <div onClick={() => setItemsValue(name)} className="table-rate-complete-name">
-                                {name[0]}
-                                <span>{nameAmount[name[0]]}</span>
+                            <div onClick={() => setItemsValue(item)} className="table-rate-complete-name">
+                                {item.nameMoney}
+                                <span>{item.completeName}</span>
                             </div>
                         </NavLink>
-                        <span className="table-rate-number">{name[1]}</span>
+                        <span className="table-rate-number">{item.rateMoney}</span>
                     </div>
                 ))
            }
