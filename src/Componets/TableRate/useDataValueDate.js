@@ -6,7 +6,7 @@ function useDataValueDate(url) {
 
     // VALORES DE LA SEMANA
     useEffect(() => {
-        fetch(`${url}/2021-01-01..?to=${itemsValue[0]}`)
+        fetch(`${url}/2021-01-01..?to=${itemsValue.nameMoney}`)
             .then(res => res.json())
             .then(data => setRateWeek(data.rates))
     }, [])
@@ -22,7 +22,7 @@ function useDataValueDate(url) {
     //VALURES DEL DIA
 
     useEffect(() => {
-        fetch(`${url}/2024-01-02..${dateToday}?to=${itemsValue[0]}`)
+        fetch(`${url}/2024-01-02..${dateToday}?to=${itemsValue.nameMoney}`)
             .then(res => res.json())
             .then(data => setRateDay(data.rates))
     }, [])
@@ -41,7 +41,7 @@ function useDataValueDate(url) {
 
     //VALORES DEL AÑO
     useEffect(() => {
-        fetch(`${url}/2014-01-01..?to=${itemsValue[0]}`)
+        fetch(`${url}/2014-01-01..?to=${itemsValue.nameMoney}`)
             .then(res => res.json())
             .then(data => setRateYears(data.rates))
     }, [])
