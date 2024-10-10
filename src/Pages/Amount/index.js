@@ -5,18 +5,18 @@ import "./index.css"
 
 
 function Amount() {
-    const {nameAmount,amountCurency, setAmountCurency,nameCurrencyResult, setNameCurrencyResult,nameCurrency, setNameCurrency, apiAmountCurrency, innerValueCurrencyResult} = useContext(MoneyPageContext)
-    let arrvalueName = Object.values(nameAmount);
-    let arrAliasAndName = Object.entries(nameAmount);
-    const arrEntriesCompleName = []
+    const {nameCompleteCurrency,amountCurency, setAmountCurency,nameCurrencyResult, setNameCurrencyResult,nameCurrency, setNameCurrency, apiConvertAmount, innerValueCurrencyResult} = useContext(MoneyPageContext)
+    let listNameCompleteCurrency = Object.values(nameCompleteCurrency);
+    let shortAndCompleteNameCurrency = Object.entries(nameCompleteCurrency);
+    const swapValueNameCurrency = []
 
-    arrAliasAndName.forEach(valueArr => {
-       arrEntriesCompleName.push([valueArr[1], valueArr[0]])
+    shortAndCompleteNameCurrency.forEach(valueArr => {
+       swapValueNameCurrency.push([valueArr[1], valueArr[0]])
     })
     
-    let objCompleteName = Object.fromEntries(arrEntriesCompleName)
-    let varibleNameCurrency = objCompleteName[nameCurrency]
-    let variableNameCurrencyResult = objCompleteName[nameCurrencyResult]
+    let getShortNameCurrency = Object.fromEntries(swapValueNameCurrency)
+    let shortNameCurrency = getShortNameCurrency[nameCurrency]
+    let shortNameCurrencyResult = getShortNameCurrency[nameCurrencyResult]
 
 
     return(
@@ -27,7 +27,7 @@ function Amount() {
                         <label htmlFor="input-amount-currency">Badge</label>
                         <input id="input-amount-currency" type="number" onChange={(e) => setAmountCurency(e.target.value)}/>
                         <select onChange={(e) => setNameCurrency(e.target.value)}>
-                            {arrvalueName.map((name, index) => (
+                            {listNameCompleteCurrency.map((name, index) => (
                                 <option key={index} value={name}>{name}</option>
                             ))}
                         </select>
@@ -36,12 +36,12 @@ function Amount() {
                         <label htmlFor="input-amount-result">Amount</label>
                         <input id="input-amount-result" type="text" value={innerValueCurrencyResult}/>
                         <select onChange={(e) => setNameCurrencyResult(e.target.value)}>
-                            {arrvalueName.map((name, index) => (
+                            {listNameCompleteCurrency.map((name, index) => (
                                 <option key={index} value={name}>{name}</option>
                             ))}
                         </select>
                     </div>
-                    <button onClick={() => apiAmountCurrency(amountCurency,varibleNameCurrency,variableNameCurrencyResult)}>Currency</button>
+                    <button onClick={() => apiConvertAmount(amountCurency,shortNameCurrency,shortNameCurrencyResult)}>Currency</button>
                 </form>
             </section>
         </Layout>

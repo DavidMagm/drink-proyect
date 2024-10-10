@@ -6,13 +6,13 @@ export function MoneyPageProvider({children}) {
 
     const url = 'https://api.frankfurter.app';
 
-    const [items,setItems] = useState([]);
-    const [itemsValue, setItemsValue] = useState([]);
+    const [listRateNameLatest,setListRateNameLatest] = useState([]);
+    const [infoMoneyRate, setInfoMoneyRate] = useState([]);
     const [rateDay, setRateDay] = useState([]);
     const [rateWeek, setRateWeek] = useState([]);
     const [rateYears, setRateYears] = useState([]);
     const [dateToday, setDateToday] = useState("");
-    const [nameAmount, setNameAmount] = useState({})
+    const [nameCompleteCurrency, setNameCompleteCurrency] = useState({})
     const [nameCurrency, setNameCurrency] = useState("");
     const [nameCurrencyResult, setNameCurrencyResult] = useState("");
     const [amountCurency, setAmountCurency] = useState("");
@@ -24,7 +24,7 @@ export function MoneyPageProvider({children}) {
     useEffect(() => {
         fetch(`${url}/latest`)
             .then(res => res.json())
-            .then(data => setItems(data.rates))
+            .then(data => setListRateNameLatest(data.rates))
     },[])
 
 
@@ -37,10 +37,10 @@ export function MoneyPageProvider({children}) {
     useEffect(() => {
         fetch(`https://api.frankfurter.app/currencies`)
             .then(res => res.json())
-            .then(data => setNameAmount(data))
+            .then(data => setNameCompleteCurrency(data))
     }, [])
 
-    async function apiAmountCurrency(valueCash,currencyPrincipal,currencyTransform) {
+    async function apiConvertAmount(valueCash,currencyPrincipal,currencyTransform) {
         const response = await fetch(`https://api.frankfurter.app/latest?amount=${valueCash}&from=${currencyPrincipal}&to=${currencyTransform}`)
             const data = await response.json()
             setInnerValueCurrencyResult(data.rates[currencyTransform])
@@ -51,7 +51,7 @@ export function MoneyPageProvider({children}) {
     
 
     return(
-        <MoneyPageContext.Provider value={{items,itemsValue,setItemsValue,dateToday,rateWeek,setRateWeek, rateYears, setRateYears,rateDay, setRateDay, nameAmount, amountCurency, setAmountCurency, nameCurrencyResult, setNameCurrencyResult, nameCurrency, setNameCurrency,innerValueCurrencyResult,apiAmountCurrency,valueSearch, setValueSearch}}>
+        <MoneyPageContext.Provider value={{listRateNameLatest,infoMoneyRate,setInfoMoneyRate,dateToday,rateWeek,setRateWeek, rateYears, setRateYears,rateDay, setRateDay, nameCompleteCurrency, amountCurency, setAmountCurency, nameCurrencyResult, setNameCurrencyResult, nameCurrency, setNameCurrency,innerValueCurrencyResult,apiConvertAmount,valueSearch, setValueSearch}}>
             {children}
         </MoneyPageContext.Provider>
     )

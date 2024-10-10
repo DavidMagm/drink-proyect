@@ -7,14 +7,14 @@ import { TableRate } from '../TableRate';
 
 
 function InfoRateTable() {
-    const {itemsValue} = useContext(MoneyPageContext)
+    const {infoMoneyRate} = useContext(MoneyPageContext)
     
     return(
         <section className="section-info-rate">
             <div className='container-name'> 
-                <h2>{itemsValue.completeName}</h2>
-                <h3>{itemsValue.nameMoney}</h3>
-                <p>{itemsValue.rateMoney}</p>
+                <h2>{infoMoneyRate.completeName}</h2>
+                <h3>{infoMoneyRate.nameMoney}</h3>
+                <p>{infoMoneyRate.rateMoney}</p>
             </div>
             <div className='container-rate'>
                 <TableRate></TableRate>
