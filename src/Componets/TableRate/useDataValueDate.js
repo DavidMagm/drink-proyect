@@ -2,77 +2,77 @@ import { useContext, useEffect } from "react"
 import { MoneyPageContext } from "../../Context"
 function useDataValueDate(url) {
 
-    const {itemsValue, dateToday, rateWeek, setRateWeek, rateYears, setRateYears, rateDay, setRateDay} = useContext(MoneyPageContext)
+    const {infoMoneyRate, dateToday, rateWeek, setRateWeek, rateYears, setRateYears, rateDay, setRateDay} = useContext(MoneyPageContext)
 
-    // VALORES DE LA SEMANA
+    // VALUES WEEKS
     useEffect(() => {
-        fetch(`${url}/2021-01-01..?to=${itemsValue.nameMoney}`)
+        fetch(`${url}/2021-01-01..?to=${infoMoneyRate.nameMoney}`)
             .then(res => res.json())
             .then(data => setRateWeek(data.rates))
-    }, [])
+    }, [infoMoneyRate.nameMoney])
 
     const weekData = []
 
     for(let [key, value] of Object.entries(rateWeek)) {
-        for(let [_,valueItem] of Object.entries(value)) {
-            weekData.push({time: key, value: valueItem})
+        for(let [_,valueRateCurrency] of Object.entries(value)) {
+            weekData.push({time: key, value: valueRateCurrency})
         }
     }
     
-    //VALURES DEL DIA
+    //VALUES DAYS
 
     useEffect(() => {
-        fetch(`${url}/2024-01-02..${dateToday}?to=${itemsValue.nameMoney}`)
+        fetch(`${url}/2024-01-02..${dateToday}?to=${infoMoneyRate.nameMoney}`)
             .then(res => res.json())
             .then(data => setRateDay(data.rates))
-    }, [])
+    }, [infoMoneyRate.nameMoney])
 
 
     const dayData = []
 
     for(let [key, value] of Object.entries(rateDay)) {
-        for(let [_, valueItem] of Object.entries(value)) {
-            dayData.push({time: key, value: valueItem})
+        for(let [_, valueRateCurrency] of Object.entries(value)) {
+            dayData.push({time: key, value: valueRateCurrency})
         }
     }
 
     console.log(dayData)
 
 
-    //VALORES DEL AÑO
+    //VALUES YEARS
     useEffect(() => {
-        fetch(`${url}/2014-01-01..?to=${itemsValue.nameMoney}`)
+        fetch(`${url}/2014-01-01..?to=${infoMoneyRate.nameMoney}`)
             .then(res => res.json())
             .then(data => setRateYears(data.rates))
-    }, [])
+    }, [infoMoneyRate.nameMoney])
 
-    let arrayValueYear = Object.entries(rateYears)
+    let dateWeeksRate = Object.entries(rateYears)
 
     const yearData = []
 
-    let filterYear = arrayValueYear.filter(uno => {
-        let res = uno[0].match(/\d\d\d\d-01-0[0-7]/g)
+    let filterDateForYears = dateWeeksRate.filter(valueDate => {
+        let res = valueDate[0].match(/\d\d\d\d-01-0[0-7]/g)
         return res
     })
-    filterYear.map(uno => {
-        for(let [_, valueItem] of Object.entries(uno[1])) {
-            yearData.push({time: uno[0], value: valueItem})
+    filterDateForYears.forEach(valueDate => {
+        for(let [_, valueRateCurrency] of Object.entries(valueDate[1])) {
+            yearData.push({time: valueDate[0], value: valueRateCurrency})
         }
     })
 
-    //VALORES DEL MES
-    let arrayValueMonth = Object.entries(rateWeek)
+    //VALUES MONTHS
+    let valueDateWeeksRate = Object.entries(rateWeek)
 
-    let filterMonth = arrayValueMonth.filter(uno => {
-        let res = uno[0].match(/\d\d\d\d-\d[0-9]-0[0-7]/g)
+    let filterDateForMonths = valueDateWeeksRate.filter(valueDate => {
+        let res = valueDate[0].match(/\d\d\d\d-\d[0-9]-0[0-7]/g)
         return res
     })
 
     const monthData = []
 
-    filterMonth.map(uno => {
-        for(let [_, valueItem] of Object.entries(uno[1])) {
-            monthData.push({time: uno[0], value: valueItem})
+    filterDateForMonths.map(valueDate => {
+        for(let [_, valueRateCurrency] of Object.entries(valueDate[1])) {
+            monthData.push({time: valueDate[0], value: valueRateCurrency})
         }
     })
     //console.log(filterMonth)

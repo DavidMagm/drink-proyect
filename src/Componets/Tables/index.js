@@ -5,13 +5,13 @@ import './index.css'
 
 function Tables() {
 
-    const {items, setItemsValue, nameAmount, valueSearch} = useContext(MoneyPageContext)
+    const {listRateNameLatest, setInfoMoneyRate, nameCompleteCurrency, valueSearch} = useContext(MoneyPageContext)
     
     let tableMoneyData = []
-    let nameAndRate = Object.entries(items)
+    let nameRateLatest = Object.entries(listRateNameLatest)
     console.log(valueSearch)
-    nameAndRate.map(rateName => 
-        tableMoneyData.push({nameMoney: rateName[0], rateMoney: rateName[1], completeName: nameAmount[rateName[0]]})
+    nameRateLatest.map(rateName => 
+        tableMoneyData.push({nameMoney: rateName[0], rateMoney: rateName[1], completeName: nameCompleteCurrency[rateName[0]]})
     )
     
     return(
@@ -20,7 +20,7 @@ function Tables() {
             tableMoneyData.map((item,index) => (
                     <div key={index} className="table-rate-name">
                         <NavLink to={'rate'}>
-                            <div onClick={() => setItemsValue(item)} className="table-rate-complete-name">
+                            <div onClick={() => setInfoMoneyRate(item)} className="table-rate-complete-name">
                                 {item.nameMoney}
                                 <span>{item.completeName}</span>
                             </div>
