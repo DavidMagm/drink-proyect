@@ -18,6 +18,7 @@ export function MoneyPageProvider({children}) {
     const [amountCurency, setAmountCurency] = useState("");
     const [innerValueCurrencyResult, setInnerValueCurrencyResult] = useState(0)
     const [valueSearch, setValueSearch] = useState("");
+    const [topNewsBusiness, setTopNewsBusiness] = useState([])
 
 
 
@@ -40,6 +41,12 @@ export function MoneyPageProvider({children}) {
             .then(data => setNameCompleteCurrency(data))
     }, [])
 
+    useEffect(() => {
+        fetch('https://newsapi.org/v2/top-headlines?category=business&pageSize=10&apiKey=6e9123d54a31446e82cdd97208d8c7fb')
+        .then(response => response.json())
+        .then(data => setTopNewsBusiness(data.articles))
+    },[])
+
     async function apiConvertAmount(valueCash,currencyPrincipal,currencyTransform) {
         const response = await fetch(`https://api.frankfurter.app/latest?amount=${valueCash}&from=${currencyPrincipal}&to=${currencyTransform}`)
             const data = await response.json()
@@ -51,7 +58,7 @@ export function MoneyPageProvider({children}) {
     
 
     return(
-        <MoneyPageContext.Provider value={{listRateNameLatest,infoMoneyRate,setInfoMoneyRate,dateToday,rateWeek,setRateWeek, rateYears, setRateYears,rateDay, setRateDay, nameCompleteCurrency, amountCurency, setAmountCurency, nameCurrencyResult, setNameCurrencyResult, nameCurrency, setNameCurrency,innerValueCurrencyResult,apiConvertAmount,valueSearch, setValueSearch}}>
+        <MoneyPageContext.Provider value={{listRateNameLatest,infoMoneyRate,setInfoMoneyRate,dateToday,rateWeek,setRateWeek, rateYears, setRateYears,rateDay, setRateDay, nameCompleteCurrency, amountCurency, setAmountCurency, nameCurrencyResult, setNameCurrencyResult, nameCurrency, setNameCurrency,innerValueCurrencyResult,apiConvertAmount,valueSearch, setValueSearch, topNewsBusiness}}>
             {children}
         </MoneyPageContext.Provider>
     )

@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { MoneyPageContext } from '../../Context';
 import './index.css';
 import { TableRate } from '../TableRate';
+import { NewsFinalSection } from '../NewsFinalSection';
 
 
 
@@ -19,6 +20,7 @@ function InfoRateTable() {
             <div className='container-rate'>
                 <TableRate></TableRate>
             </div>
+            <NewsFinalSection></NewsFinalSection>
         </section>
     )
 }

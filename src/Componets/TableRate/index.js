@@ -73,6 +73,7 @@ function TableRate() {
         container.appendChild(buttonsContainer);
 
         return () => {chart.remove()}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
     

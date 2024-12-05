@@ -1,0 +1,27 @@
+.section-news-final-rate {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+}
+.card-news-final-rate {
+    width: 400px;
+}
+.container-img-news-final {
+    width: 300px;
+}
+.container-img-news-final img {
+    width: 100%;
+    object-fit: cover;
+}
+.container-title-news-final span {
+    color: #a00;
+}
+.container-title-news-final a {
+    text-decoration: none;
+    color: #000;
+}
+.container-title-news-final a:hover {
+    text-decoration: underline;
+    color: rgb(164, 89, 209);
+}
