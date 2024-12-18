@@ -27,6 +27,7 @@ function Amount() {
                         <label htmlFor="input-amount-currency">Badge</label>
                         <input id="input-amount-currency" type="number" onChange={(e) => setAmountCurency(e.target.value)}/>
                         <select onChange={(e) => setNameCurrency(e.target.value)}>
+                            <option value={'select'}>Select Currency</option>
                             {listNameCompleteCurrency.map((name, index) => (
                                 <option key={index} value={name}>{name}</option>
                             ))}
@@ -36,6 +37,7 @@ function Amount() {
                         <label htmlFor="input-amount-result">Amount</label>
                         <input id="input-amount-result" type="text" value={innerValueCurrencyResult}/>
                         <select onChange={(e) => setNameCurrencyResult(e.target.value)}>
+                            <option value={'select'}>Select Currency</option>
                             {listNameCompleteCurrency.map((name, index) => (
                                 <option key={index} value={name}>{name}</option>
                             ))}
