@@ -1,5 +1,5 @@
 // import { useContext } from "react";
-import {useRoutes, BrowserRouter} from "react-router-dom";
+import {useRoutes} from "react-router-dom";
 import {  MoneyPageProvider } from "../../Context";
 import { Home } from "../Home";
 import { Rate } from "../Rate";
@@ -18,10 +18,8 @@ function AppRoutes() {
 function App() {
   return (
     <MoneyPageProvider>
-      <BrowserRouter>
         <Nav/>
         <AppRoutes/>
-      </BrowserRouter>
     </MoneyPageProvider>
   );
 }

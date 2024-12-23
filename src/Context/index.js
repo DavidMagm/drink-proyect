@@ -23,22 +23,30 @@ export function MoneyPageProvider({children}) {
 
 
     useEffect(() => {
-        fetch(`${url}/latest`)
-            .then(res => res.json())
-            .then(data => setListRateNameLatest(data.rates))
-    },[])
-
-
-    useEffect(() => {
-        fetch(`https://api.frankfurter.app/latest`)
-            .then(res => res.json())
-            .then(data => setDateToday(data.date))
+        async function apiRateLastest() {
+            try {
+                const response = await fetch(`${url}/latest`)
+                const data = await response.json()
+                setListRateNameLatest(data.rates)
+                setDateToday(data.date)    
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        apiRateLastest()
     }, [])
 
     useEffect(() => {
-        fetch(`https://api.frankfurter.app/currencies`)
-            .then(res => res.json())
-            .then(data => setNameCompleteCurrency(data))
+        async function apiCurrenciesLastest() {
+            try {
+                const response = await fetch(`https://api.frankfurter.app/currencies`)
+                const data = await response.json()
+                setNameCompleteCurrency(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        apiCurrenciesLastest()
     }, [])
 
     async function apiConvertAmount(valueCash,currencyPrincipal,currencyTransform) {
