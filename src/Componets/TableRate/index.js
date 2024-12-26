@@ -14,20 +14,14 @@ function TableRate() {
 
     const {dayData,weekData,monthData,yearData} = useDataValueDate('https://api.frankfurter.app')
 
-   
-
-    
     useEffect(() => {
-
+        console.log(dayData)
         const seriesesData = new Map([
             ['1D', dayData],
             ['1W', weekData],
             ['1M', monthData],
             ['1Y', yearData],
         ]);
-
-
-
 
         const chartOptions = {
             layout: {
@@ -51,11 +45,13 @@ function TableRate() {
         const lineSeries = chart.addLineSeries({ color: intervalColors['1D'] });
         
         const setChartInterval = (interval) => {
-            lineSeries.setData(seriesesData.get(interval));
-            lineSeries.applyOptions({
-                color: intervalColors[interval],
-            });
-            chart.timeScale().fitContent();
+            setTimeout(() => {
+                lineSeries.setData(seriesesData.get(interval));
+                lineSeries.applyOptions({
+                    color: intervalColors[interval],
+                });
+                chart.timeScale().fitContent();
+            }, 1500)
         }
         
         setChartInterval('1D');
@@ -73,7 +69,7 @@ function TableRate() {
         container.appendChild(buttonsContainer);
 
         return () => {chart.remove()}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
     

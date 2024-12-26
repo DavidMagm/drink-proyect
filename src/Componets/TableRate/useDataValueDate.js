@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable array-callback-return */
 import { useContext, useEffect } from "react"
 import { MoneyPageContext } from "../../Context"
 function useDataValueDate(url) {
@@ -6,9 +8,19 @@ function useDataValueDate(url) {
 
     // VALUES WEEKS
     useEffect(() => {
-        fetch(`${url}/2021-01-01..?to=${infoMoneyRate.nameMoney}`)
-            .then(res => res.json())
-            .then(data => setRateWeek(data.rates))
+            async function apiRateWeek() {
+                try {
+                    const response = await fetch(`${url}/2021-01-01..?to=${infoMoneyRate.nameMoney}`)
+                    const data = await response.json()
+                    setRateWeek(data.rates)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            apiRateWeek()
+            // fetch(`${url}/2021-01-01..?to=${infoMoneyRate.nameMoney}`)
+            //     .then(res => res.json())
+            //     .then(data => setRateWeek(data.rates))
     }, [infoMoneyRate.nameMoney])
 
     const weekData = []
@@ -22,9 +34,20 @@ function useDataValueDate(url) {
     //VALUES DAYS
 
     useEffect(() => {
-        fetch(`${url}/2024-01-02..${dateToday}?to=${infoMoneyRate.nameMoney}`)
-            .then(res => res.json())
-            .then(data => setRateDay(data.rates))
+            async function apiRateDay() {
+                try {
+                    const response = await fetch(`${url}/2024-01-02..${dateToday}?to=${infoMoneyRate.nameMoney}`)
+                    const data = await response.json()
+                    setRateDay(data.rates)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            apiRateDay()
+            // fetch(`${url}/2024-01-02..${dateToday}?to=${infoMoneyRate.nameMoney}`)
+            //     .then(res => res.json())
+            //     .then(data => setRateDay(data.rates))
+
     }, [infoMoneyRate.nameMoney])
 
 
@@ -36,14 +59,21 @@ function useDataValueDate(url) {
         }
     }
 
-    console.log(dayData)
-
-
     //VALUES YEARS
     useEffect(() => {
-        fetch(`${url}/2014-01-01..?to=${infoMoneyRate.nameMoney}`)
-            .then(res => res.json())
-            .then(data => setRateYears(data.rates))
+            async function apiRateYears() {
+                try {
+                    const response = await fetch(`${url}/2014-01-01..?to=${infoMoneyRate.nameMoney}`)
+                    const data = await response.json()
+                    setRateYears(data.rates)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            apiRateYears()
+            // fetch(`${url}/2014-01-01..?to=${infoMoneyRate.nameMoney}`)
+            //     .then(res => res.json())
+            //     .then(data => setRateYears(data.rates))
     }, [infoMoneyRate.nameMoney])
 
     let dateWeeksRate = Object.entries(rateYears)
@@ -71,6 +101,7 @@ function useDataValueDate(url) {
     const monthData = []
 
     filterDateForMonths.map(valueDate => {
+        // eslint-disable-next-line no-unused-vars
         for(let [_, valueRateCurrency] of Object.entries(valueDate[1])) {
             monthData.push({time: valueDate[0], value: valueRateCurrency})
         }

@@ -15,7 +15,8 @@ function Tables() {
     )
 
     let filterRateList = tableMoneyData.filter(currency => {
-        let nameCurrency = '' || currency.completeName.toLowerCase()
+        let nameCurrency = 'undefined';
+        if(currency.completeName) nameCurrency = currency.completeName.toLowerCase()
         return nameCurrency.includes(valueSearch.toLowerCase())
     })
 
