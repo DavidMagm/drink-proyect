@@ -7,16 +7,18 @@ function Tables() {
 
     const {listRateNameLatest, setInfoMoneyRate, nameCompleteCurrency, valueSearch} = useContext(MoneyPageContext)
     
-    let tableMoneyData = []
-    let nameRateLatest = Object.entries(listRateNameLatest)
+    const nameRateLatest = Object.entries(listRateNameLatest)
 
-    nameRateLatest.map(rateName => 
-        tableMoneyData.push({nameMoney: rateName[0], rateMoney: rateName[1], completeName: nameCompleteCurrency[rateName[0]]})
+    const currencyTableData = nameRateLatest.map(([shortName, rateMoney]) => 
+        ({
+        nameMoney: shortName, 
+        rateMoney: rateMoney, 
+        completeName: nameCompleteCurrency[shortName] || 'undefined'
+        })
     )
 
-    let filterRateList = tableMoneyData.filter(currency => {
-        let nameCurrency = 'undefined';
-        if(currency.completeName) nameCurrency = currency.completeName.toLowerCase()
+    let filterRateList = currencyTableData.filter(currency => {
+        let nameCurrency = currency.completeName.toLowerCase()
         return nameCurrency.includes(valueSearch.toLowerCase())
     })
 

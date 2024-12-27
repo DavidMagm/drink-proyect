@@ -51,7 +51,7 @@ function TableRate() {
                     color: intervalColors[interval],
                 });
                 chart.timeScale().fitContent();
-            }, 1500)
+            }, 500)
         }
         
         setChartInterval('1D');

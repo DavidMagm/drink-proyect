@@ -5,19 +5,29 @@ import "./index.css"
 
 
 function Amount() {
-    const {nameCompleteCurrency,amountCurency, setAmountCurency,nameCurrencyResult, setNameCurrencyResult,nameCurrency, setNameCurrency, apiConvertAmount, innerValueCurrencyResult} = useContext(MoneyPageContext)
+    const {
+        nameCompleteCurrency,
+        amountCurency, 
+        setAmountCurency,
+        nameCurrencyResult,
+        setNameCurrencyResult,
+        nameCurrency,
+        setNameCurrency,
+        apiConvertAmount,
+        innerValueCurrencyResult
+    } = useContext(MoneyPageContext)
     let listNameCompleteCurrency = Object.values(nameCompleteCurrency);
-    let shortAndCompleteNameCurrency = Object.entries(nameCompleteCurrency);
-    const swapValueNameCurrency = []
-
-    shortAndCompleteNameCurrency.forEach(valueArr => {
-       swapValueNameCurrency.push([valueArr[1], valueArr[0]])
-    })
     
-    let getShortNameCurrency = Object.fromEntries(swapValueNameCurrency)
+    let getShortNameCurrency = Object.fromEntries(
+        Object.entries(nameCompleteCurrency).map(([shortName, fullName]) => [fullName, shortName])
+    )
     let shortNameCurrency = getShortNameCurrency[nameCurrency]
     let shortNameCurrencyResult = getShortNameCurrency[nameCurrencyResult]
 
+    const handleAmountChange = (e) => setAmountCurency(e.target.value); 
+    const handleCurrencyChange = (e) => setNameCurrency(e.target.value); 
+    const handleCurrencyResultChange = (e) => setNameCurrencyResult(e.target.value); 
+    const handleConvertClick = () => apiConvertAmount(amountCurency,shortNameCurrency,shortNameCurrencyResult);
 
     return(
         <Layout>
@@ -25,8 +35,8 @@ function Amount() {
                 <form className="currency-amount" onSubmit={(e) => e.preventDefault()}>
                     <div className="container-amount">
                         <label htmlFor="input-amount-currency">Badge</label>
-                        <input id="input-amount-currency" type="number" onChange={(e) => setAmountCurency(e.target.value)}/>
-                        <select onChange={(e) => setNameCurrency(e.target.value)}>
+                        <input id="input-amount-currency" type="number" onChange={handleAmountChange}/>
+                        <select onChange={handleCurrencyChange}>
                             <option value={'select'}>Select Currency</option>
                             {listNameCompleteCurrency.map((name, index) => (
                                 <option key={index} value={name}>{name}</option>
@@ -36,14 +46,14 @@ function Amount() {
                     <div className="container-amount">
                         <label htmlFor="input-amount-result">Amount</label>
                         <input id="input-amount-result" type="text" value={innerValueCurrencyResult}/>
-                        <select onChange={(e) => setNameCurrencyResult(e.target.value)}>
+                        <select onChange={handleCurrencyResultChange}>
                             <option value={'select'}>Select Currency</option>
                             {listNameCompleteCurrency.map((name, index) => (
                                 <option key={index} value={name}>{name}</option>
                             ))}
                         </select>
                     </div>
-                    <button onClick={() => apiConvertAmount(amountCurency,shortNameCurrency,shortNameCurrencyResult)}>Currency</button>
+                    <button onClick={handleConvertClick}>Currency</button>
                 </form>
             </section>
         </Layout>
